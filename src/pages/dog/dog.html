@@ -1,0 +1,31 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{dog.name}}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding text-center>
+    <ion-img width="200" height="200" src="assets/img/dog{{ dog.id}}.jpg"></ion-img>
+    <p>Breed: {{ dog.breed }}</p>
+    <p>Sex: {{ dog.sex }}</p>
+    <p>Breed: {{ dog.age }}</p>
+     <p>Energy: {{ dog.energy }}</p>
+    <ion-row>
+        <ion-col text-right>
+          <button 
+            ion-button 
+            clear 
+            small
+            (click)="onAddToFavorites(dog)"
+            *ngIf="!isFavorite(dog)">Select</button>
+          <button 
+            ion-button 
+            clear 
+            small
+            color="danger"
+            (click)="onRemoveFromFavorites(dog)"
+            *ngIf="isFavorite(dog)">Unselect</button>
+        </ion-col>
+    </ion-row>
+</ion-content>

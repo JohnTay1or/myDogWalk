@@ -1,0 +1,25 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Dogs</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <h3 text-center>Look at dogs</h3>
+  <ion-list>
+    <button 
+      ion-item 
+      *ngFor="let dog of dogsCollection"
+      [navPush]="dogPage"
+      [navParams]="dog">
+      <!--<ion-icon [name]="dog.icon" item-left></ion-icon>-->
+      <ion-img width="60" height="60" src="assets/img/dog{{ dog.id}}.jpg" item-left></ion-img>
+      <h2>{{ dog.name | uppercase }}</h2>
+      <p>{{ dog.breed }}</p>
+    </button>
+  </ion-list>
+</ion-content>

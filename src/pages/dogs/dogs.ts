@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+//import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { AlertController } from 'ionic-angular';
 //import { NavParams } from 'ionic-angular';
 import { Dog } from "../../data/dog.interface";
-import dogs from "../../data/dogs";
+//import dogs from "../../data/dogs";
 import { DogsService} from "../../services/dogs"
 import { DogPage } from "../dog/dog"
 
@@ -11,7 +12,8 @@ import { DogPage } from "../dog/dog"
   selector: 'page-dogs',
   templateUrl: 'dogs.html',
 })
-export class DogsPage implements OnInit {
+//export class DogsPage implements OnInit {
+export class DogsPage {
   dogsCollection: Dog[];
   dogPage = DogPage;
   
@@ -21,9 +23,13 @@ export class DogsPage implements OnInit {
     private dogsService: DogsService,
   ) {}
   
-  ngOnInit() {
-    this.dogsCollection = dogs;
+  //ngOnInit() {
+  //  this.dogsCollection = this.dogsService.getDogs();
     //console.log(this.dogsCollection)
+  //}
+  
+  ionViewWillEnter() {
+    this.dogsCollection = this.dogsService.getDogs();
   }
   
   //ionViewDidLoad() {

@@ -21,7 +21,7 @@ export class DogPage implements OnInit {
   
   ngOnInit() {
     this.dog = this.navParams.data;
-    console.log(this.dog);
+    //console.log(this.dog);
   }
   
   //ionViewDidLoad() {

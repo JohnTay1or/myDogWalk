@@ -5,5 +5,6 @@ export interface Dog {
     icon: string,
     sex: string,
     age: number,
-    energy: string 
+    energy: string,
+    size: string
 }

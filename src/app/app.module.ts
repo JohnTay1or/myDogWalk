@@ -11,6 +11,7 @@ import { FavoritesPage } from '../pages/favorites/favorites';
 import { DogsPage } from '../pages/dogs/dogs';
 import { DogPage } from '../pages/dog/dog';
 import { DogsService } from '../services/dogs';
+import { NewDogPage } from '../pages/new-dog/new-dog';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -24,7 +25,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 //    HomePage,
     TabsPage,
     DogsPage,
-    DogPage
+    DogPage,
+    NewDogPage
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 //    HomePage,
     TabsPage,
     DogsPage,
-    DogPage
+    DogPage,
+    NewDogPage
   ],
   providers: [
     StatusBar,

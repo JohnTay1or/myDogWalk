@@ -1,0 +1,82 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Register a dog</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form #f="ngForm" (ngSubmit)="onAddDog(f)">
+    <ion-list>
+      <ion-item>
+        <ion-label fixed>Name</ion-label>
+        <ion-input 
+          type="text" 
+          name="name" 
+          placeholder="Lassie"
+          ngModel
+          required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>Age</ion-label>
+        <ion-input 
+          type="number" 
+          name="age" 
+          placeholder="2"
+          ngModel
+          required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>Sex</ion-label>
+        <ion-select name="sex" [(ngModel)]="sex">
+          <!--<ion-option 
+            *ngFor="let option of selectOptions"
+            [value]="option">{{ option }}</ion-option>>-->
+          <ion-option value="Male" selected>Male</ion-option>
+          <ion-option value="Female">Female</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>Energy</ion-label>
+        <ion-select name="energy" [(ngModel)]="energy">
+          <!--<ion-option 
+            *ngFor="let option of selectOptions"
+            [value]="option">{{ option }}</ion-option>>-->
+          <ion-option value="Lazy" selected>Lazy</ion-option>
+          <ion-option value="Moderate">Moderate</ion-option>
+          <ion-option value="Active">Active</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>Size</ion-label>
+        <ion-select name="size" [(ngModel)]="size">
+          <!--<ion-option 
+            *ngFor="let option of selectOptions"
+            [value]="option">{{ option }}</ion-option>>-->
+          <ion-option value="Extra Small" selected>Extra Small</ion-option>
+          <ion-option value="Small" selected>Small</ion-option>
+          <ion-option value="Medium" selected>Medium</ion-option>
+          <ion-option value="Large">Large</ion-option>
+          <ion-option value="Extra Large">Extra Large</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>Breed</ion-label>
+        <ion-input 
+          type="string" 
+          name="breed" 
+          placeholder="Enter a breed"
+          ngModel
+          required></ion-input>
+      </ion-item>
+    </ion-list>
+    <button
+      ion-button
+      type="submit"
+      block
+      [disabled]="!f.valid">Add Dog</button>
+  </form>
+</ion-content>

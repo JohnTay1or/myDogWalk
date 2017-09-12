@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from "@angular/forms";
-import { NavController } from 'ionic-angular';
+//import { NavController } from 'ionic-angular';
 import { DogsService } from "../../services/dogs";
 
 //@IonicPage()
@@ -11,7 +11,7 @@ import { DogsService } from "../../services/dogs";
 export class NewDogPage {
   selectOptions = ['Male', 'Female']; 
 
-  constructor(private navCtrl: NavController, 
+  constructor(/*private navCtrl: NavController, */
               private dogsService: DogsService) {
   }
 
@@ -31,7 +31,7 @@ export class NewDogPage {
       size: form.value.size
     });
     form.reset();
-    this.navCtrl.parent.select(3);
+    //this.navCtrl.parent.select(3);
     //this.navCtrl.popToRoot();
     //this.loadItems();
   }

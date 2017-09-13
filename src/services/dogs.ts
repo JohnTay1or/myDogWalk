@@ -1,8 +1,17 @@
-import { Dog } from "../data/dog.interface";
+import { Injectable } from "@angular/core";
+import { Http, Response } from "@angular/http";
+import 'rxjs/Rx';
 
+import { Dog } from "../data/dog.interface";
+import { AuthService } from "./auth";
+
+@Injectable()
 export class DogsService {
     private favoriteDogs: Dog[] = [];
     private dogs: Dog[] = [];
+    
+    constructor(private authService: AuthService,
+                private http: Http) {}
     
     addDogToFavorites(dog: Dog) {
         //console.log(dog);
@@ -27,9 +36,14 @@ export class DogsService {
         })
     } 
     
-    addDog(dog: Dog) {
-        this.dogs.push(dog);
-        //console.log(this.dogs);
+    addDog(token: string, dog: Dog) {
+        //this.dogs.push(dog);
+        const userId = this.authService.getActiveUser().uid;
+        return this.http
+            .put('https://mydogwalk-ad2f0.firebaseio.com/' + userId + '/dogs.json?auth=' + token, dog)
+            .map((response: Response) => {
+                return response.json(); 
+            });
     }
     
      getDogs() {

@@ -1,5 +1,6 @@
 export interface Dog {
     id: string,
+    owner: string,
     name: string,
     breed: string,
     icon: string,

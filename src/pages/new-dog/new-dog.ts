@@ -31,6 +31,7 @@ export class NewDogPage {
       content: 'Please wait...'
     }) 
     const dog = {
+      owner: 'tba',
       id: '5', 
       name: form.value.name, 
       breed: form.value.breed, 
@@ -52,7 +53,7 @@ export class NewDogPage {
               }
             );
         }
-    );  
+      );  
     //this.dogsService.addDog({
     //  id: '5', 
     //  name: form.value.name, 

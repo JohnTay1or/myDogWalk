@@ -1,11 +1,12 @@
 //import { Component, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 
-import { AlertController } from 'ionic-angular';
+import { LoadingController, AlertController } from 'ionic-angular';
 //import { NavParams } from 'ionic-angular';
 import { Dog } from "../../data/dog.interface";
 //import dogs from "../../data/dogs";
 import { DogsService} from "../../services/dogs"
+import { AuthService } from "../../services/auth";
 import { DogPage } from "../dog/dog"
 
 @Component({
@@ -21,6 +22,8 @@ export class DogsPage {
     //private navParams: NavParams,
     private alertCtrl: AlertController,
     private dogsService: DogsService,
+    private authService: AuthService,
+    private loadingCtrl: LoadingController
   ) {}
   
   //ngOnInit() {
@@ -29,7 +32,34 @@ export class DogsPage {
   //}
   
   ionViewWillEnter() {
-    this.dogsCollection = this.dogsService.getDogs();
+    const loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+    this.authService.getActiveUser().getToken()
+      .then(
+        (token: string) => {
+          this.dogsService.getDogs(token)
+            .subscribe(
+              (data) => {
+                //console.log('I am intested in what we get back');
+                //console.log(data);
+                this.dogsCollection = []
+                for (const key of Object.keys(data)) {
+                  //console.log(key, data[key]);
+                  this.dogsCollection.push(data[key]);
+                }
+                //this.dogsCollection = []
+                //this.dogsCollection.push(data);
+                loading.dismiss()
+                },
+              error => {
+                loading.dismiss();
+                this.handleError(error.json().error);
+              }
+            );
+        }
+      );
+    //this.dogsCollection = this.dogsService.getDogs();
   }
   
   //ionViewDidLoad() {
@@ -61,10 +91,22 @@ export class DogsPage {
     
     alert.present();
   }
+  
   onRemoveFromFavorites(dog: Dog) {
     this.dogsService.removeDogFromFavorites(dog);
   }
+  
   isFavorite(dog: Dog) {
     return this.dogsService.isDogFavorite(dog);
   }
+  
+  private handleError(errorMessage: string) {
+    const alert = this.alertCtrl.create({
+      title: 'An error occurred!',
+      message: errorMessage,
+      buttons: ['Ok']
+    });
+    alert.present();
+  }
+  
 }

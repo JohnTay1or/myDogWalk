@@ -8,7 +8,7 @@ import { AuthService } from "./auth";
 @Injectable()
 export class DogsService {
     private favoriteDogs: Dog[] = [];
-    private dogs: Dog[] = [];
+    //private dogs: Dog[] = [];
     
     constructor(private authService: AuthService,
                 private http: Http) {}
@@ -39,16 +39,30 @@ export class DogsService {
     addDog(token: string, dog: Dog) {
         //this.dogs.push(dog);
         const userId = this.authService.getActiveUser().uid;
+        dog['owner'] = userId;
         return this.http
-            .put('https://mydogwalk-ad2f0.firebaseio.com/' + userId + '/dogs.json?auth=' + token, dog)
+            .post('https://mydogwalk-ad2f0.firebaseio.com/dogs.json?auth=' + token, dog)
             .map((response: Response) => {
                 return response.json(); 
             });
     }
     
-     getDogs() {
+     getDogs(token: string) {
         //console.log(this.dogs);
-        return this.dogs.slice();
+        //return this.dogs.slice();
+        //const userId = this.authService.getActiveUser().uid;
+        return this.http
+            .get('https://mydogwalk-ad2f0.firebaseio.com/dogs.json?auth=' + token)
+            .map((response: Response) => {
+                return response.json(); 
+            })
+            //.do((data) => {
+                //console.log(data);
+                //this.dogs = [];
+            //    this.dogs.push(data);
+            //    console.log(this.dogs);
+            //})
+            ;
     }
     
 }

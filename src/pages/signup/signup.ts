@@ -21,7 +21,27 @@ export class SignupPage {
     loading.present();
     this.authService.signup(form.value.email, form.value.password)
       .then(data => {
-        loading.dismiss();
+        //console.log(data);
+        //const userId = this.authService.getActiveUser().uid;
+        const userType = form.value.userType;
+        //console.log(userId);
+        console.log(userType);
+        this.authService.getActiveUser().getToken()
+          .then(
+            (token: string) => {
+              //console.log(token);
+              this.authService.defineUser(token, userType)
+                .subscribe(
+                  () => loading.dismiss(),
+                  error => {
+                    console.log('Am I here')
+                    loading.dismiss();
+                    this.handleError(error.json().error);
+                  }
+                );
+            }
+          );  
+        //loading.dismiss();
       })
       .catch(error => {
         loading.dismiss();
@@ -33,4 +53,14 @@ export class SignupPage {
         alert.present();
       });
   }
+  
+  private handleError(errorMessage: string) {
+    const alert = this.alertCtrl.create({
+      title: 'An error occurred!',
+      message: errorMessage,
+      buttons: ['Ok']
+    });
+    alert.present();
+  }
+  
 }

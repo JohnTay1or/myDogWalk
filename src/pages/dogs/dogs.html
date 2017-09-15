@@ -1,7 +1,11 @@
 
 <ion-header>
-
   <ion-navbar>
+    <ion-buttons start>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>Dogs</ion-title>
   </ion-navbar>
 
@@ -17,7 +21,10 @@
       [navPush]="dogPage"
       [navParams]="dog">
       <!--<ion-icon [name]="dog.icon" item-left></ion-icon>-->
-      <ion-img width="60" height="60" src="assets/img/dog{{ dog.id}}.jpg" item-left></ion-img>
+      <!--<ion-img width="60" height="60" src="assets/img/dog{{ dog.id}}.jpg" item-left></ion-img>-->
+      <ion-avatar item-left>
+        <img src="assets/img/dog{{ dog.id }}.jpg">
+      </ion-avatar>
       <h2>{{ dog.name | uppercase }}</h2>
       <p>{{ dog.breed }}</p>
     </button>

@@ -30,9 +30,10 @@ export class NewDogPage {
     const loading = this.loadingCtrl.create({
       content: 'Please wait...'
     }) 
+    const imgId = Math.floor(Math.random() * (5 - 1)) + 1;
     const dog = {
       owner: 'tba',
-      id: '5', 
+      id: imgId.toString(), 
       name: form.value.name, 
       breed: form.value.breed, 
       icon: 'icon', 

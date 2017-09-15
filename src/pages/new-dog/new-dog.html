@@ -1,7 +1,11 @@
 
 <ion-header>
-
   <ion-navbar>
+    <ion-buttons start>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>Register a dog</ion-title>
   </ion-navbar>
 
@@ -31,7 +35,7 @@
       </ion-item>
       <ion-item>
         <ion-label fixed>Sex</ion-label>
-        <ion-select name="sex" [(ngModel)]="sex">
+        <ion-select name="sex" [(ngModel)]="sex" required>
           <!--<ion-option 
             *ngFor="let option of selectOptions"
             [value]="option">{{ option }}</ion-option>>-->
@@ -41,7 +45,7 @@
       </ion-item>
       <ion-item>
         <ion-label fixed>Energy</ion-label>
-        <ion-select name="energy" [(ngModel)]="energy">
+        <ion-select name="energy" [(ngModel)]="energy" required>
           <!--<ion-option 
             *ngFor="let option of selectOptions"
             [value]="option">{{ option }}</ion-option>>-->
@@ -52,7 +56,7 @@
       </ion-item>
       <ion-item>
         <ion-label fixed>Size</ion-label>
-        <ion-select name="size" [(ngModel)]="size">
+        <ion-select name="size" [(ngModel)]="size" required>
           <!--<ion-option 
             *ngFor="let option of selectOptions"
             [value]="option">{{ option }}</ion-option>>-->

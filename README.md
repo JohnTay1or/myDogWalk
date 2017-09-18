@@ -24,3 +24,14 @@ $ ionic cordova run ios
 
 Substitute ios for android if not on a Mac.
 
+Things to do
+
+-	Forgot password 2
+-	Contact us form - name, email, question/type here 4
+-	Edit profile 5
+-	Upload Picture (upload from camera roll or take picture – both functions)1
+-	My dogs page for owners 6
+-	My dogs (favourites page) for walkers 7
+-	Search function on dogs page 4
+-	Contact owner (messaging functionality walker to owner) 3
+-	Profile page

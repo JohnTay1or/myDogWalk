@@ -17,7 +17,7 @@ import { DogPage } from "../dog/dog"
 export class DogsPage {
   dogsCollection: Dog[];
   dogPage = DogPage;
-  
+
   constructor(
     //private navParams: NavParams,
     private alertCtrl: AlertController,
@@ -25,12 +25,12 @@ export class DogsPage {
     private authService: AuthService,
     private loadingCtrl: LoadingController
   ) {}
-  
+
   //ngOnInit() {
   //  this.dogsCollection = this.dogsService.getDogs();
     //console.log(this.dogsCollection)
   //}
-  
+
   ionViewWillEnter() {
     const loading = this.loadingCtrl.create({
       content: 'Please wait...'
@@ -61,12 +61,12 @@ export class DogsPage {
       );
     //this.dogsCollection = this.dogsService.getDogs();
   }
-  
+
   //ionViewDidLoad() {
   //  this.quoteGroup = this.navParams.data;
   // Add elvis operator (?) in template to use this approach
   //}
-  
+
   onAddToFavorites(selectedDog: Dog) {
     const alert = this.alertCtrl.create({
       title: 'Add Dog',
@@ -88,18 +88,18 @@ export class DogsPage {
         }
       ]
     })
-    
+
     alert.present();
   }
-  
+
   onRemoveFromFavorites(dog: Dog) {
     this.dogsService.removeDogFromFavorites(dog);
   }
-  
+
   isFavorite(dog: Dog) {
     return this.dogsService.isDogFavorite(dog);
   }
-  
+
   private handleError(errorMessage: string) {
     const alert = this.alertCtrl.create({
       title: 'An error occurred!',
@@ -108,5 +108,5 @@ export class DogsPage {
     });
     alert.present();
   }
-  
+
 }

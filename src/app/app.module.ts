@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
 
 import { TabsPage } from '../pages/tabs/tabs';
+import { TabsOwnerPage } from '../pages/tabsowner/tabsowner';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 //import { HomePage } from '../pages/home/home';
@@ -29,6 +30,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     FavoritesPage,
 //    HomePage,
     TabsPage,
+    TabsOwnerPage,
     DogsPage,
     DogPage,
     NewDogPage,
@@ -48,6 +50,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     FavoritesPage,
 //    HomePage,
     TabsPage,
+    TabsOwnerPage,
     DogsPage,
     DogPage,
     NewDogPage,
@@ -58,7 +61,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    DogsService, 
+    DogsService,
     AuthService
   ]
 })

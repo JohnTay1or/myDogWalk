@@ -17,7 +17,7 @@
             <button
                 ion-item
                 icon-left
-                (click)="onLoad(signinPage)"
+                (click)="onLoad(signinPage, 0)"
                 *ngIf="!isAuthenticated">
                 <ion-icon name="log-in"></ion-icon>
                 Signin
@@ -25,7 +25,7 @@
             <button
                 ion-item
                 icon-left
-                (click)="onLoad(signupPage)"
+                (click)="onLoad(signupPage, 0)"
                 *ngIf="!isAuthenticated">
                 <ion-icon name="person"></ion-icon>
                 Signup

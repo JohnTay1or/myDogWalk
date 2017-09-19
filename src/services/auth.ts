@@ -28,12 +28,21 @@ export class AuthService {
         //this.dogs.push(dog);
         const userId = this.getActiveUser().uid;
         const userTypeObj = {userType: userType};
-        console.log(userId);
-        console.log(token);
+        //console.log(userId);
+        //console.log(token);
         return this.http
             .put('https://mydogwalk-ad2f0.firebaseio.com/users/' + userId + '.json?auth=' + token, userTypeObj)
             .map((response: Response) => {
                 return response.json();
             });
+    }
+
+    getUserType(token: string) {
+      const userId = this.getActiveUser().uid;
+      return this.http
+          .get('https://mydogwalk-ad2f0.firebaseio.com/users/' + userId + '.json?auth=' + token)
+          .map((response: Response) => {
+              return response.json();
+          })
     }
 }

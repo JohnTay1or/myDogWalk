@@ -35,6 +35,7 @@ export class DogsPage {
     const loading = this.loadingCtrl.create({
       content: 'Please wait...'
     });
+    loading.present();
     this.authService.getActiveUser().getToken()
       .then(
         (token: string) => {
@@ -44,10 +45,12 @@ export class DogsPage {
                 //console.log('I am intested in what we get back');
                 //console.log(data);
                 this.dogsCollection = []
-                for (const key of Object.keys(data)) {
-                  //console.log(key, data[key]);
-                  this.dogsCollection.push(data[key]);
-                }
+                if (data) {
+                  for (const key of Object.keys(data)) {
+                    //console.log(key, data[key]);
+                    this.dogsCollection.push(data[key]);
+                  }
+                }  
                 //this.dogsCollection = []
                 //this.dogsCollection.push(data);
                 loading.dismiss()

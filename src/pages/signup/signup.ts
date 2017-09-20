@@ -13,7 +13,7 @@ export class SignupPage {
                private loadingCtrl: LoadingController,
                private alertCtrl: AlertController) {
   }
-  
+
   onSignup(form: NgForm) {
     const loading = this.loadingCtrl.create({
       content: 'Signing you up...'
@@ -23,7 +23,7 @@ export class SignupPage {
       .then(data => {
         //console.log(data);
         //const userId = this.authService.getActiveUser().uid;
-        const userType = form.value.userType;
+        /*const userType = form.value.userType;
         //console.log(userId);
         console.log(userType);
         this.authService.getActiveUser().getToken()
@@ -40,8 +40,8 @@ export class SignupPage {
                   }
                 );
             }
-          );  
-        //loading.dismiss();
+          );  */
+        loading.dismiss();
       })
       .catch(error => {
         loading.dismiss();
@@ -53,14 +53,14 @@ export class SignupPage {
         alert.present();
       });
   }
-  
-  private handleError(errorMessage: string) {
+
+  /*private handleError(errorMessage: string) {
     const alert = this.alertCtrl.create({
       title: 'An error occurred!',
       message: errorMessage,
       buttons: ['Ok']
     });
     alert.present();
-  }
-  
+  }*/
+
 }

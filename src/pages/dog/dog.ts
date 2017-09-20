@@ -12,23 +12,23 @@ import { DogsService} from "../../services/dogs"
 })
 export class DogPage implements OnInit {
   dog: Dog;
-  
+
   constructor(
     private navParams: NavParams,
     private alertCtrl: AlertController,
     private dogsService: DogsService,
   ) {}
-  
+
   ngOnInit() {
     this.dog = this.navParams.data;
     //console.log(this.dog);
   }
-  
+
   //ionViewDidLoad() {
   //  this.quoteGroup = this.navParams.data;
   // Add elvis operator (?) in template to use this approach
   //}
-  
+
   onAddToFavorites(selectedDog: Dog) {
     const alert = this.alertCtrl.create({
       title: 'Add Dog',
@@ -45,12 +45,12 @@ export class DogPage implements OnInit {
           text: 'No, I changed my mind',
           role: 'cancel',
           handler: () => {
-            console.log('Cancelled!')
+            //console.log('Cancelled!')
           }
         }
       ]
     })
-    
+
     alert.present();
   }
   onRemoveFromFavorites(dog: Dog) {

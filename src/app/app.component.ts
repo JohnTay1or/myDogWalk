@@ -1,11 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
 import { Platform } from 'ionic-angular';
-import { NavController, MenuController, AlertController } from "ionic-angular";
+//import { NavController, MenuController, AlertController } from "ionic-angular";
+import { NavController, MenuController } from "ionic-angular";
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import firebase from 'firebase';
 
-import { TabsPage } from '../pages/tabs/tabs';
+//import { TabsPage } from '../pages/tabs/tabs';
 import { TabsOwnerPage } from '../pages/tabsowner/tabsowner';
 import { SigninPage } from '../pages/signin/signin';
 import { SignupPage } from '../pages/signup/signup';
@@ -24,8 +25,8 @@ export class MyApp {
   constructor(platform: Platform,
               statusBar: StatusBar, splashScreen: SplashScreen,
               private menuCtrl: MenuController,
-              private authService: AuthService,
-              private alertCtrl: AlertController
+              private authService: AuthService//,
+              //private alertCtrl: AlertController
               ) {
     firebase.initializeApp({
       apiKey: "AIzaSyDfSnSi7aQbdNJrbbSZ-Q2Ijz2uDD0g8rQ",
@@ -34,12 +35,15 @@ export class MyApp {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.isAuthenticated = true;
-        this.authService.getActiveUser().getToken()
+        this.rootPage = TabsOwnerPage;
+        /*this.authService.getActiveUser().getToken()
           .then(
             (token: string) => {
+              //console.log(token);
               this.authService.getUserType(token)
                 .subscribe(
                   (data) => {
+                    console.log(data);
                     console.log(data.userType);
                     if (data.userType === 'owner') {
                       this.rootPage = TabsOwnerPage;
@@ -52,7 +56,7 @@ export class MyApp {
                   }
                 );
             }
-          );
+          );*/
       } else {
         this.isAuthenticated = false;
         this.rootPage = SigninPage;
@@ -77,12 +81,12 @@ export class MyApp {
     this.nav.setRoot(SigninPage);
   }
 
-  private handleError(errorMessage: string) {
+  /*private handleError(errorMessage: string) {
     const alert = this.alertCtrl.create({
       title: 'An error occurred!',
       message: errorMessage,
       buttons: ['Ok']
     });
     alert.present();
-  }
+  }*/
 }

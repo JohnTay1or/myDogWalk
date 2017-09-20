@@ -17,6 +17,7 @@ import { DogsService } from '../services/dogs';
 import { NewDogPage } from '../pages/new-dog/new-dog';
 import { SigninPage } from '../pages/signin/signin';
 import { SignupPage } from '../pages/signup/signup';
+import { ProfilePage } from '../pages/profile/profile';
 import { AuthService } from '../services/auth';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -35,7 +36,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     DogPage,
     NewDogPage,
     SigninPage,
-    SignupPage
+    SignupPage,
+    ProfilePage
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     DogPage,
     NewDogPage,
     SigninPage,
-    SignupPage
+    SignupPage,
+    ProfilePage 
   ],
   providers: [
     StatusBar,

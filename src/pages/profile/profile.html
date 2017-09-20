@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Profile</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <ion-list>
+      <ion-item>
+        <ion-label fixed>User Type</ion-label>
+        <ion-select name="userType" [(ngModel)]="userType" required>
+          <ion-option value="owner" selected>Dog Owner</ion-option>
+          <ion-option value="walker">Dog Walker</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <button ion-button block type="submit" [disabled]="!f.valid">Save</button>
+  </form>
+</ion-content>

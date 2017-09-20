@@ -2,11 +2,10 @@ import { Component, ViewChild } from '@angular/core';
 import { Tabs } from 'ionic-angular';
 
 import { FavoritesPage } from '../favorites/favorites';
+import { DogsPage } from '../dogs/dogs';
+import { ProfilePage } from '../profile/profile';
 import { AboutPage } from '../about/about';
 import { ContactPage } from '../contact/contact';
-//import { HomePage } from '../home/home';
-import { DogsPage } from '../dogs/dogs';
-
 
 @Component({
   templateUrl: 'tabs.html'
@@ -17,8 +16,9 @@ export class TabsPage {
   //tab1Root = HomePage;
   tab1Root = FavoritesPage;
   tab2Root = DogsPage;
-  tab3Root = AboutPage;
-  tab4Root = ContactPage;
+  tab3Root = ProfilePage;
+  tab4Root = AboutPage;
+  tab5Root = ContactPage;
 
 
   constructor() {

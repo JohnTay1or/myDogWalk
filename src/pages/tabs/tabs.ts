@@ -1,5 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
-import { Tabs } from 'ionic-angular';
+import { Component } from '@angular/core';
 
 import { FavoritesPage } from '../favorites/favorites';
 import { DogsPage } from '../dogs/dogs';
@@ -8,12 +7,11 @@ import { AboutPage } from '../about/about';
 import { ContactPage } from '../contact/contact';
 
 @Component({
+  selector: 'page-tabs',
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
 
-  @ViewChild('myTabs') tabRef: Tabs;
-  //tab1Root = HomePage;
   tab1Root = FavoritesPage;
   tab2Root = DogsPage;
   tab3Root = ProfilePage;
@@ -22,14 +20,5 @@ export class TabsPage {
 
 
   constructor() {
-
-  }
-
-  ionViewDidEnter() {
-    this.tabRef.select(4);
-  }
-
-  switchPage(id) {
-    this.tabRef.select(id);
   }
 }

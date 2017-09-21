@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Platform, Events } from 'ionic-angular';
 //import { NavController, MenuController, AlertController } from "ionic-angular";
 import { NavController, MenuController } from "ionic-angular";
 import { StatusBar } from '@ionic-native/status-bar';
@@ -8,6 +8,7 @@ import firebase from 'firebase';
 
 //import { TabsPage } from '../pages/tabs/tabs';
 import { TabsOwnerPage } from '../pages/tabsowner/tabsowner';
+import { TabsProfilePage } from '../pages/tabsprofile/tabsprofile';
 import { SigninPage } from '../pages/signin/signin';
 import { SignupPage } from '../pages/signup/signup';
 import { AuthService} from '../services/auth';
@@ -16,7 +17,7 @@ import { AuthService} from '../services/auth';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = TabsOwnerPage;
+  rootPage:any = TabsProfilePage;
   signinPage:any = SigninPage;
   signupPage:any = SignupPage;
   isAuthenticated = false;
@@ -25,7 +26,8 @@ export class MyApp {
   constructor(platform: Platform,
               statusBar: StatusBar, splashScreen: SplashScreen,
               private menuCtrl: MenuController,
-              private authService: AuthService//,
+              private authService: AuthService,
+              public events: Events//,
               //private alertCtrl: AlertController
               ) {
     firebase.initializeApp({
@@ -35,7 +37,7 @@ export class MyApp {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.isAuthenticated = true;
-        this.rootPage = TabsOwnerPage;
+        this.rootPage = TabsProfilePage;
         /*this.authService.getActiveUser().getToken()
           .then(
             (token: string) => {
@@ -68,6 +70,9 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
     });
+    events.subscribe('user:savedProfile', () => {
+      this.savedProfile();
+    });
   }
 
   onLoad(page: any) {
@@ -89,4 +94,10 @@ export class MyApp {
     });
     alert.present();
   }*/
+
+  savedProfile() {
+    console.log("savedProfile");
+    this.rootPage = TabsOwnerPage;
+  }
+
 }

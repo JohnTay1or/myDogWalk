@@ -7,6 +7,7 @@ import { MyApp } from './app.component';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { TabsOwnerPage } from '../pages/tabsowner/tabsowner';
+import { TabsProfilePage } from '../pages/tabsprofile/tabsprofile';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 //import { HomePage } from '../pages/home/home';
@@ -32,6 +33,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 //    HomePage,
     TabsPage,
     TabsOwnerPage,
+    TabsProfilePage,
     DogsPage,
     DogPage,
     NewDogPage,
@@ -53,12 +55,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 //    HomePage,
     TabsPage,
     TabsOwnerPage,
+    TabsProfilePage,
     DogsPage,
     DogPage,
     NewDogPage,
     SigninPage,
     SignupPage,
-    ProfilePage 
+    ProfilePage
   ],
   providers: [
     StatusBar,

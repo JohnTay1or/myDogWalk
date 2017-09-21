@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { LoadingController, AlertController } from 'ionic-angular';
+import { LoadingController, AlertController, Events } from 'ionic-angular';
 
 import { AuthService } from '../../services/auth';
 
@@ -11,15 +11,16 @@ import { AuthService } from '../../services/auth';
 export class ProfilePage {
   constructor (private authService: AuthService,
                private loadingCtrl: LoadingController,
-               private alertCtrl: AlertController) {
+               private alertCtrl: AlertController,
+               public events: Events) {
   }
 
   onSubmit(form: NgForm) {
     const loading = this.loadingCtrl.create({
-      content: 'Signing you up...'
+      content: 'Saving your profile...'
     });
     loading.present();
-    const userId = this.authService.getActiveUser().uid;
+    //:const userId = this.authService.getActiveUser().uid;
     const userType = form.value.userType;
     //console.log(userId);
     //console.log(userType);
@@ -28,7 +29,10 @@ export class ProfilePage {
         (token: string) => {
           this.authService.defineUser(token, userType)
             .subscribe(
-              () => loading.dismiss(),
+              () => {
+                loading.dismiss();
+                this.events.publish('user:savedProfile');
+              },
               error => {
                 loading.dismiss();
                 this.handleError(error.json().error);

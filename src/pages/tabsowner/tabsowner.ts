@@ -17,9 +17,9 @@ export class TabsOwnerPage {
   //@ViewChild('myTabs') tabRef: Tabs;
 
   //tab1Root = HomePage;
-  tab1Root = ProfilePage;
+  tab1Root = DogsPage;
   tab2Root = NewDogPage;
-  tab3Root = DogsPage;
+  tab3Root = ProfilePage;
   tab4Root = AboutPage;
   tab5Root = ContactPage;
 

@@ -19,7 +19,10 @@ import { NewDogPage } from '../pages/new-dog/new-dog';
 import { SigninPage } from '../pages/signin/signin';
 import { SignupPage } from '../pages/signup/signup';
 import { ProfilePage } from '../pages/profile/profile';
+import { EditProfilePage } from '../pages/edit-profile/edit-profile';
+
 import { AuthService } from '../services/auth';
+import { ProfileService } from '../services/profile';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -39,7 +42,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     NewDogPage,
     SigninPage,
     SignupPage,
-    ProfilePage
+    ProfilePage,
+    EditProfilePage
   ],
   imports: [
     BrowserModule,
@@ -61,14 +65,16 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     NewDogPage,
     SigninPage,
     SignupPage,
-    ProfilePage
+    ProfilePage,
+    EditProfilePage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DogsService,
-    AuthService
+    AuthService,
+    ProfileService
   ]
 })
 export class AppModule {}

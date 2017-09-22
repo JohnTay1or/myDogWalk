@@ -8,14 +8,11 @@ import { ProfileService } from '../../services/profile';
 import { Profile } from "../../data/profile.interface";
 
 @Component({
-  selector: 'profile',
-  templateUrl: 'profile.html',
+  selector: 'edit-profile',
+  templateUrl: 'edit-profile.html',
 })
-export class ProfilePage {
-  private profile: Profile;
-  //email: string;
-
-  email = 'this is an email';
+export class EditProfilePage {
+  profile: Profile = {userId: null, email: null, userType: null};
 
   constructor (private authService: AuthService,
                private profileService: ProfileService,
@@ -42,6 +39,30 @@ export class ProfilePage {
                 loading.dismiss();
                 this.events.publish('user:savedProfile');
               },
+              error => {
+                loading.dismiss();
+                this.handleError(error.json().error);
+              }
+            );
+        }
+      );
+  }
+
+  ionViewWillEnter() {
+    const loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+    loading.present();
+    this.authService.getActiveUser().getToken()
+      .then(
+        (token: string) => {
+          this.profileService.getProfile(token)
+            .subscribe(
+              (data) => {
+                this.profile = data;
+                loading.dismiss();
+                //console.log(this.profile);
+                },
               error => {
                 loading.dismiss();
                 this.handleError(error.json().error);

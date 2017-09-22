@@ -1,4 +1,4 @@
-export default [
+/*export default [
     {
         id: '1',
         name: 'Bella',
@@ -44,4 +44,4 @@ export default [
         age: 2,
         energy: 'moderate'
     }
-];
+];*/

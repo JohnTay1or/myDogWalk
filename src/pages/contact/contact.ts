@@ -5,6 +5,9 @@ import { LoadingController, AlertController } from 'ionic-angular';
 
 import { ContactService } from "../../services/contact";
 import { AuthService } from "../../services/auth";
+import { ProfileService } from '../../services/profile';
+
+import { Profile } from "../../data/profile.interface";
 
 @Component({
   selector: 'page-contact',
@@ -12,14 +15,22 @@ import { AuthService } from "../../services/auth";
 })
 export class ContactPage {
 
+  profile: Profile = {userId: null, email: null, userType: null};
+
   constructor(/*private navCtrl: NavController,*/
               private contactService: ContactService,
               private loadingCtrl: LoadingController,
               private alertCtrl: AlertController,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private profileService: ProfileService) {
+  }
+
+  ionViewWillEnter() {
+    this.profile = this.profileService.profile;
   }
 
   onContact(form: NgForm) {
+    //console.log(this.profile);
     const loading = this.loadingCtrl.create({
       content: 'Please wait...'
     })

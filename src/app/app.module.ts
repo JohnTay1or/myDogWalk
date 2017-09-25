@@ -23,6 +23,7 @@ import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 
 import { AuthService } from '../services/auth';
 import { ProfileService } from '../services/profile';
+import { ContactService } from '../services/contact';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -74,7 +75,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DogsService,
     AuthService,
-    ProfileService
+    ProfileService,
+    ContactService
   ]
 })
 export class AppModule {}

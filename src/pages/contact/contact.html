@@ -11,7 +11,63 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+  <form #f="ngForm" (ngSubmit)="onContact(f)">
+    <ion-list>
+      <ion-item>
+        <ion-label fixed>First Name</ion-label>
+        <ion-input
+          type="text"
+          name="firstName"
+          placeholder="First Name"
+          ngModel
+          required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>Last Name</ion-label>
+        <ion-input
+          type="text"
+          name="lastName"
+          placeholder="Last Name"
+          ngModel
+          required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>Phone</ion-label>
+        <ion-input
+          type="string"
+          name="phone"
+          placeholder="Phone"
+          ngModel
+          required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>Email</ion-label>
+        <ion-input
+          type="string"
+          name="email"
+          placeholder="Email"
+          ngModel
+          required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>Comment</ion-label>
+        <ion-textarea
+          name="comment"
+          placeholder="Comment or Question"
+          ngModel
+          required></ion-textarea>
+      </ion-item>
+    </ion-list>
+    <button
+      ion-button
+      type="submit"
+      block
+      [disabled]="!f.valid">Send</button>
+  </form>
+</ion-content>
+
+<!--<ion-content>
   <ion-list>
     <ion-list-header>Follow us on Twitter</ion-list-header>
     <ion-item>
@@ -19,4 +75,4 @@
       @ionicframework
     </ion-item>
   </ion-list>
-</ion-content>
+</ion-content>-->

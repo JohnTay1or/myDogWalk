@@ -22,7 +22,7 @@
       [navPush]="dogPage"
       [navParams]="dog">
       <ion-avatar item-left>
-        <img src="assets/img/dog{{ dog.id }}.jpg">
+        <img src="assets/img/dog{{ imageId() }}.jpg">
       </ion-avatar>
       <h2>{{ dog.name | uppercase }}</h2>
       <p>{{ dog.breed }}</p>
@@ -34,7 +34,7 @@
       *ngFor="let dog of dogsCollection">
       <ion-item>
         <ion-avatar item-left>
-          <img src="assets/img/dog{{ imageid() }}.jpg">
+          <img src="assets/img/dog{{ imageId() }}.jpg">
         </ion-avatar>
         <h2>{{ dog.name }}</h2>
         <p>{{ dog.breed }}</p>

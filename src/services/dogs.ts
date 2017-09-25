@@ -13,10 +13,18 @@ export class DogsService {
     constructor(private authService: AuthService,
                 private http: Http) {}
 
-    addDogToFavorites(dog: Dog) {
-        //console.log(dog);
-        this.favoriteDogs.push(dog);
+    addDogToFavorites(token: string, dog: Dog) {
+        //console.log(token)
+        //console.log(dog.id);
+        const userId = this.authService.getActiveUser().uid;
+        //console.log(userId);
+        //this.favoriteDogs.push(dog);
         //console.log(this.favoriteDogs);
+        return this.http
+            .post('https://mydogwalk-ad2f0.firebaseio.com/users/' + userId + '/favorites.json?auth=' + token, {id: dog.id})
+            .map((response: Response) => {
+                return response.json();
+            });
     }
 
     removeDogFromFavorites(dog: Dog) {

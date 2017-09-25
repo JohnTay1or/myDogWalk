@@ -117,7 +117,7 @@ export class DogsPage {
       );
   }
 
-  onAddToFavorites(selectedDog: Dog) {
+  /*onAddToFavorites(selectedDog: Dog) {
     const alert = this.alertCtrl.create({
       title: 'Add Dog',
       subTitle: 'Are you sure?',
@@ -140,13 +140,13 @@ export class DogsPage {
     })
 
     alert.present();
-  }
+  }*/
 
   isOwner() {
     return this.profileService.profile.userType === 'owner'
   }
 
-  imageid() {
+  imageId() {
     return 1;
   }
 

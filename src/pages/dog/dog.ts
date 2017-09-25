@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AlertController } from 'ionic-angular';
+import { AlertController, LoadingController } from 'ionic-angular';
 import { NavParams } from 'ionic-angular';
 import { Dog } from "../../data/dog.interface";
 //import dogs from "../../data/dogs";
-import { DogsService} from "../../services/dogs"
+import { DogsService } from "../../services/dogs";
+import { AuthService } from "../../services/auth";
 
 @Component({
   selector: 'page-dog',
@@ -16,7 +17,9 @@ export class DogPage implements OnInit {
   constructor(
     private navParams: NavParams,
     private alertCtrl: AlertController,
+    private loadingCtrl: LoadingController,
     private dogsService: DogsService,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -38,7 +41,39 @@ export class DogPage implements OnInit {
         {
           text: 'Yes, I love him',
           handler: () => {
-            this.dogsService.addDogToFavorites(selectedDog);
+            //this.dogsService.addDogToFavorites(selectedDog);
+
+
+            const loading = this.loadingCtrl.create({
+              content: 'Please wait...'
+            })
+            //const imgId = Math.floor(Math.random() * (5 - 1)) + 1;
+            /*const dog = {
+              owner: 'tba',
+              id: imgId.toString(),
+              name: form.value.name,
+              breed: form.value.breed,
+              icon: 'icon',
+              sex: form.value.sex,
+              age: form.value.age,
+              energy: form.value.energy,
+              size: form.value.size
+            };*/
+            this.authService.getActiveUser().getToken()
+              .then(
+                (token: string) => {
+                  this.dogsService.addDogToFavorites(token, selectedDog)
+                    .subscribe(
+                      () => {
+                        loading.dismiss();
+                      },
+                      error => {
+                        loading.dismiss();
+                        this.handleError(error.json().error);
+                      }
+                    );
+                }
+              );
           }
         },
         {
@@ -50,13 +85,27 @@ export class DogPage implements OnInit {
         }
       ]
     })
-
     alert.present();
   }
+
   onRemoveFromFavorites(dog: Dog) {
     this.dogsService.removeDogFromFavorites(dog);
   }
+
   isFavorite(dog: Dog) {
     return this.dogsService.isDogFavorite(dog);
+  }
+
+  private handleError(errorMessage: string) {
+    const alert = this.alertCtrl.create({
+      title: 'An error occurred!',
+      message: errorMessage,
+      buttons: ['Ok']
+    });
+    alert.present();
+  }
+
+  imageId() {
+    return 1;
   }
 }

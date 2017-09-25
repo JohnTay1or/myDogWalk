@@ -49,7 +49,8 @@ export class EditProfilePage {
   }
 
   ionViewWillEnter() {
-    const loading = this.loadingCtrl.create({
+    this.profile = this.profileService.profile;
+    /*const loading = this.loadingCtrl.create({
       content: 'Please wait...'
     });
     loading.present();
@@ -69,7 +70,7 @@ export class EditProfilePage {
               }
             );
         }
-      );
+      );*/
   }
 
   private handleError(errorMessage: string) {

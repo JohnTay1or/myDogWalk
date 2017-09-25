@@ -14,19 +14,41 @@
 
 <ion-content padding>
   <h3 text-center>Look at dogs</h3>
-  <ion-list>
-    <button 
-      ion-item 
+  <ion-list
+    *ngIf="!isOwner()">
+    <button
+      ion-item
       *ngFor="let dog of dogsCollection"
       [navPush]="dogPage"
       [navParams]="dog">
-      <!--<ion-icon [name]="dog.icon" item-left></ion-icon>-->
-      <!--<ion-img width="60" height="60" src="assets/img/dog{{ dog.id}}.jpg" item-left></ion-img>-->
       <ion-avatar item-left>
         <img src="assets/img/dog{{ dog.id }}.jpg">
       </ion-avatar>
       <h2>{{ dog.name | uppercase }}</h2>
       <p>{{ dog.breed }}</p>
     </button>
+  </ion-list>
+  <ion-list
+    *ngIf="isOwner()">
+    <ion-item-sliding
+      *ngFor="let dog of dogsCollection">
+      <ion-item>
+        <ion-avatar item-left>
+          <img src="assets/img/dog{{ dog.id }}.jpg">
+        </ion-avatar>
+        <h2>{{ dog.name }}</h2>
+        <p>{{ dog.breed }}</p>
+      </ion-item>
+      <ion-item-options>
+        <button
+          ion-button
+          color="danger"
+          (click)="onRemoveFromFavorites(dog)">
+          <ion-icon name="trash">
+            Delete
+          </ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
 </ion-content>

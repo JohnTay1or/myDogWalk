@@ -3,22 +3,22 @@ import { NgForm } from '@angular/forms';
 import { LoadingController, AlertController, Events } from 'ionic-angular';
 
 import { AuthService } from '../../services/auth';
-import { ProfileService } from '../../services/profile';
+//import { ProfileService } from '../../services/profile';
 
-import { Profile } from "../../data/profile.interface";
+//import { Profile } from "../../data/profile.interface";
 
 @Component({
   selector: 'profile',
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
-  private profile: Profile;
+  //private profile: Profile;
   //email: string;
 
   email = 'this is an email';
 
   constructor (private authService: AuthService,
-               private profileService: ProfileService,
+               //private profileService: ProfileService,
                private loadingCtrl: LoadingController,
                private alertCtrl: AlertController,
                public events: Events) {

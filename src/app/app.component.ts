@@ -12,6 +12,8 @@ import { TabsProfilePage } from '../pages/tabsprofile/tabsprofile';
 import { SigninPage } from '../pages/signin/signin';
 import { SignupPage } from '../pages/signup/signup';
 import { AuthService} from '../services/auth';
+import { ProfileService} from '../services/profile';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -28,7 +30,8 @@ export class MyApp {
               private menuCtrl: MenuController,
               private authService: AuthService,
               public events: Events,
-              private alertCtrl: AlertController
+              private alertCtrl: AlertController,
+              private profileService: ProfileService
               ) {
     firebase.initializeApp({
       apiKey: "AIzaSyDfSnSi7aQbdNJrbbSZ-Q2Ijz2uDD0g8rQ",
@@ -49,6 +52,12 @@ export class MyApp {
                       //console.log('Here?')
                       if (data) {
                         //console.log(data);
+                        const actUser = authService.getActiveUser()
+                        this.profileService.profile= {
+                          userId: actUser.uid,
+                          email: actUser.email,
+                          userType: data.userType
+                        }
                         //console.log(data.userType);
                         if (data.userType === 'owner') {
                           this.rootPage = TabsOwnerPage;

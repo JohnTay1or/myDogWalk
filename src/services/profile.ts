@@ -4,9 +4,12 @@ import 'rxjs/Rx';
 
 //import { Profile } from "../data/profile.interface";
 import { AuthService } from "./auth";
+import { Profile } from "../data/profile.interface";
 
 @Injectable()
 export class ProfileService {
+
+    public profile: Profile;
 
     constructor(private authService: AuthService,
                 private http: Http) {}
@@ -23,7 +26,16 @@ export class ProfileService {
           data.userId = userId;
           data.email = email;
           //return response.json();
+          this.profile = data;
           return data;
         });
+    }
+
+    isOwner() {
+      return this.profile.userType === 'owner';
+    }
+
+    isWalker() {
+      return this.profile.userType === 'walker';
     }
 }

@@ -2,11 +2,12 @@
 import { Component } from '@angular/core';
 
 import { LoadingController, AlertController } from 'ionic-angular';
-//import { NavParams } from 'ionic-angular';
 import { Dog } from "../../data/dog.interface";
-//import dogs from "../../data/dogs";
 import { DogsService} from "../../services/dogs"
 import { AuthService } from "../../services/auth";
+import { ProfileService } from "../../services/profile";
+import { Profile } from "../../data/profile.interface";
+
 import { DogPage } from "../dog/dog"
 
 @Component({
@@ -17,12 +18,14 @@ import { DogPage } from "../dog/dog"
 export class DogsPage {
   dogsCollection: Dog[];
   dogPage = DogPage;
+  profile: Profile;
 
   constructor(
     //private navParams: NavParams,
     private alertCtrl: AlertController,
     private dogsService: DogsService,
     private authService: AuthService,
+    private profileService: ProfileService,
     private loadingCtrl: LoadingController
   ) {}
 
@@ -32,6 +35,7 @@ export class DogsPage {
   //}
 
   ionViewWillEnter() {
+    this.profile = this.profileService.profile;
     const loading = this.loadingCtrl.create({
       content: 'Please wait...'
     });
@@ -39,20 +43,19 @@ export class DogsPage {
     this.authService.getActiveUser().getToken()
       .then(
         (token: string) => {
-          this.dogsService.getDogs(token)
+          this.dogsService.getDogs(token, this.profile.userType, this.profile.userId)
             .subscribe(
               (data) => {
                 //console.log('I am intested in what we get back');
                 //console.log(data);
+                //console.log(this.isOwner());
                 this.dogsCollection = []
                 if (data) {
                   for (const key of Object.keys(data)) {
                     //console.log(key, data[key]);
                     this.dogsCollection.push(data[key]);
                   }
-                }  
-                //this.dogsCollection = []
-                //this.dogsCollection.push(data);
+                }
                 loading.dismiss()
                 },
               error => {
@@ -62,13 +65,7 @@ export class DogsPage {
             );
         }
       );
-    //this.dogsCollection = this.dogsService.getDogs();
   }
-
-  //ionViewDidLoad() {
-  //  this.quoteGroup = this.navParams.data;
-  // Add elvis operator (?) in template to use this approach
-  //}
 
   onAddToFavorites(selectedDog: Dog) {
     const alert = this.alertCtrl.create({
@@ -93,6 +90,10 @@ export class DogsPage {
     })
 
     alert.present();
+  }
+
+  isOwner() {
+    return this.profileService.profile.userType === 'owner'
   }
 
   onRemoveFromFavorites(dog: Dog) {

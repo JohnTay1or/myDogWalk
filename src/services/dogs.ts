@@ -60,15 +60,18 @@ export class DogsService {
         return this.http
             .get(url)
             .map((response: Response) => {
+                //console.log(response.json);
                 return response.json();
-            })
-            //.do((data) => {
-                //console.log(data);
-                //this.dogs = [];
-            //    this.dogs.push(data);
-            //    console.log(this.dogs);
-            //})
-            ;
+            });
+    }
+
+    deleteDog(token: string, dogId) {
+        return this.http
+            .delete('https://mydogwalk-ad2f0.firebaseio.com/dogs/-' + dogId + '.json?auth=' + token)
+            .map((response: Response) => {
+                //console.log(response.json);
+                return response.json();
+            });
     }
 
 }

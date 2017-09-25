@@ -52,12 +52,62 @@ export class DogsPage {
                 this.dogsCollection = []
                 if (data) {
                   for (const key of Object.keys(data)) {
-                    //console.log(key, data[key]);
+                    //console.log(key);
+                    //console.log(data[key]);
+                    data[key].id = key.substring(1);
+                    //console.log(data[key]);
                     this.dogsCollection.push(data[key]);
                   }
                 }
                 loading.dismiss()
                 },
+              error => {
+                loading.dismiss();
+                this.handleError(error.json().error);
+              }
+            );
+        }
+      );
+  }
+
+  onRemoveDog(selectedDog: Dog) {
+    console.log(selectedDog.id);
+    //this.profile = this.profileService.profile;
+    const loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+    loading.present();
+    this.authService.getActiveUser().getToken()
+      .then(
+        (token: string) => {
+          this.dogsService.deleteDog(token, selectedDog.id)
+            .subscribe(
+              (data) => {
+                //loading.dismiss(),
+                this.dogsService.getDogs(token, this.profile.userType, this.profile.userId)
+                  .subscribe(
+                    (data) => {
+                    //console.log('I am intested in what we get back');
+                    //console.log(data);
+                    //console.log(this.isOwner());
+                      this.dogsCollection = []
+                      if (data) {
+                        for (const key of Object.keys(data)) {
+                          //console.log(key);
+                          //console.log(data[key]);
+                          data[key].id = key.substring(1);
+                          //console.log(data[key]);
+                          this.dogsCollection.push(data[key]);
+                        }
+                      }
+                      loading.dismiss()
+                    },
+                    error => {
+                      loading.dismiss();
+                      this.handleError(error.json().error);
+                    }
+                  );
+              },
               error => {
                 loading.dismiss();
                 this.handleError(error.json().error);
@@ -94,6 +144,10 @@ export class DogsPage {
 
   isOwner() {
     return this.profileService.profile.userType === 'owner'
+  }
+
+  imageid() {
+    return 1;
   }
 
   onRemoveFromFavorites(dog: Dog) {

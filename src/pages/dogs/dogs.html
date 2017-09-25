@@ -34,7 +34,7 @@
       *ngFor="let dog of dogsCollection">
       <ion-item>
         <ion-avatar item-left>
-          <img src="assets/img/dog{{ dog.id }}.jpg">
+          <img src="assets/img/dog{{ imageid() }}.jpg">
         </ion-avatar>
         <h2>{{ dog.name }}</h2>
         <p>{{ dog.breed }}</p>
@@ -43,7 +43,7 @@
         <button
           ion-button
           color="danger"
-          (click)="onRemoveFromFavorites(dog)">
+          (click)="onRemoveDog(dog)">
           <ion-icon name="trash">
             Delete
           </ion-icon>

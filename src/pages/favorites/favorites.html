@@ -14,18 +14,18 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item-sliding 
-      *ngFor="let dog of dogs">
+    <ion-item-sliding
+      *ngFor="let dog of this.dogsService.favoriteDogs">
       <ion-item>
         <ion-avatar item-left>
-          <img src="assets/img/dog{{ dog.id }}.jpg">
+          <img src="assets/img/dog{{ imageId() }}.jpg">
         </ion-avatar>
         <h2>{{ dog.name }}</h2>
         <p>{{ dog.breed }}</p>
       </ion-item>
       <ion-item-options>
-        <button 
-          ion-button 
+        <button
+          ion-button
           color="danger"
           (click)="onRemoveFromFavorites(dog)">
           <ion-icon name="trash">

@@ -7,41 +7,69 @@ import { AuthService } from "./auth";
 
 @Injectable()
 export class DogsService {
-    private favoriteDogs: Dog[] = [];
+    public favoriteDogs: Dog[] = [];
     //private dogs: Dog[] = [];
 
     constructor(private authService: AuthService,
                 private http: Http) {}
 
     addDogToFavorites(token: string, dog: Dog) {
-        //console.log(token)
-        //console.log(dog.id);
-        const userId = this.authService.getActiveUser().uid;
-        //console.log(userId);
-        //this.favoriteDogs.push(dog);
+        //console.log('Add before');
         //console.log(this.favoriteDogs);
+        this.favoriteDogs.push(dog);
+        //console.log('Add after');
+        //console.log(this.favoriteDogs);
+        const userId = this.authService.getActiveUser().uid;
         return this.http
-            .post('https://mydogwalk-ad2f0.firebaseio.com/users/' + userId + '/favorites.json?auth=' + token, {id: dog.id})
+            .post('https://mydogwalk-ad2f0.firebaseio.com/users/' + userId + '/favorites.json?auth=' + token, {dogId: dog.id})
             .map((response: Response) => {
                 return response.json();
             });
     }
 
-    removeDogFromFavorites(dog: Dog) {
-        const position = this.favoriteDogs.findIndex((dogEl: Dog) => {
-            return dogEl.id == dog.id;
-        });
-        this.favoriteDogs.splice(position, 1);
+    getFavoriteDogs(token: string) {
+        const userId = this.authService.getActiveUser().uid;
+        return this.http
+            .get('https://mydogwalk-ad2f0.firebaseio.com/users/' + userId + '/favorites.json?auth=' + token)
+            .map((response: Response) => {
+                return response.json();
+            });
     }
 
-    getFavoriteDogs() {
-        return this.favoriteDogs.slice();
+    getFavoriteDogsLocal() {
+      return this.favoriteDogs.slice();
     }
+
+    removeDogFromFavorites(token: string, dogId: string) {
+      //console.log('remove before');
+      //console.log(this.favoriteDogs);
+      const position = this.favoriteDogs.findIndex((dogEl: Dog) => {
+        return dogEl.id == dogId;
+      });
+      this.favoriteDogs.splice(position, 1);
+      //console.log('remove after');
+      //console.log(this.favoriteDogs);
+        const userId = this.authService.getActiveUser().uid;
+        return this.http
+            .delete('https://mydogwalk-ad2f0.firebaseio.com/users/' + userId + '/favorites/' + dogId + '.json?auth=' + token)
+            .map((response: Response) => {
+                return response.json();
+            });
+    }
+
+    //getFavoriteDogs() {
+    //    return this.favoriteDogs.slice();
+    //}
 
     isDogFavorite(dog: Dog) {
-        return this.favoriteDogs.find((dogEl: Dog) => {
-            return dogEl.id == dog.id
-        })
+      //console.log('watching this now');
+      //console.log(this.favoriteDogs);
+      return this.favoriteDogs.find((dogEl: Dog) => {
+        //console.log('In is favorite');
+        //console.log(dogEl.id);
+        //console.log(dog.id)
+        return dogEl.id == dog.id
+      })
     }
 
     addDog(token: string, dog: Dog) {
@@ -67,6 +95,15 @@ export class DogsService {
         }
         return this.http
             .get(url)
+            .map((response: Response) => {
+                //console.log(response.json);
+                return response.json();
+            });
+    }
+
+    getDog(token: string, dogId: string) {
+        return this.http
+            .get('https://mydogwalk-ad2f0.firebaseio.com/dogs/' + dogId + '.json?auth=' + token)
             .map((response: Response) => {
                 //console.log(response.json);
                 return response.json();

@@ -3,7 +3,7 @@ export interface Dog {
     owner: string,
     name: string,
     breed: string,
-    icon: string,
+    //icon: string,
     sex: string,
     age: number,
     energy: string,

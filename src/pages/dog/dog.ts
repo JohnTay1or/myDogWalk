@@ -24,8 +24,17 @@ export class DogPage implements OnInit {
 
   ngOnInit() {
     this.dog = this.navParams.data;
+    //console.log('ngOnInit');
+    //console.log(this.dogsService.favoriteDogs);
     //console.log(this.dog);
   }
+
+  //ionViewWillEnter() {
+    //this.dog = this.navParams.data;
+    //console.log('ionViewWillEnter');
+    //console.log(this.dogsService.favoriteDogs);
+    //console.log(this.dog);
+  //}
 
   //ionViewDidLoad() {
   //  this.quoteGroup = this.navParams.data;
@@ -42,23 +51,10 @@ export class DogPage implements OnInit {
           text: 'Yes, I love him',
           handler: () => {
             //this.dogsService.addDogToFavorites(selectedDog);
-
-
             const loading = this.loadingCtrl.create({
               content: 'Please wait...'
             })
-            //const imgId = Math.floor(Math.random() * (5 - 1)) + 1;
-            /*const dog = {
-              owner: 'tba',
-              id: imgId.toString(),
-              name: form.value.name,
-              breed: form.value.breed,
-              icon: 'icon',
-              sex: form.value.sex,
-              age: form.value.age,
-              energy: form.value.energy,
-              size: form.value.size
-            };*/
+            loading.present();
             this.authService.getActiveUser().getToken()
               .then(
                 (token: string) => {
@@ -89,10 +85,54 @@ export class DogPage implements OnInit {
   }
 
   onRemoveFromFavorites(dog: Dog) {
-    this.dogsService.removeDogFromFavorites(dog);
+    const loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    })
+    loading.present();
+    this.authService.getActiveUser().getToken()
+      .then(
+        (token: string) => {
+          this.dogsService.getFavoriteDogs(token)
+            .subscribe(
+              (data) => {
+                //console.log(data);
+                for (const key of Object.keys(data)) {
+                  //console.log(key);
+                  //console.log(data[key]);
+                  //data[key].id = key.substring(1);
+                  //console.log(data[key]);
+                  //this.dogsCollection.push(data[key]);
+                  //console.log(dog);
+                  //console.log(data[key].dogId === dog.id)
+                  if (data[key].dogId === dog.id) {
+                    //console.log(key);
+                    this.dogsService.removeDogFromFavorites(token, key)
+                      .subscribe(
+                        (data) => {
+                          //console.log('Here ' + data);
+                          //loading.dismiss();
+                        },
+                        error => {
+                          //loading.dismiss();
+                          this.handleError(error.json().error);
+                        }
+                      );
+                  }
+                }
+                loading.dismiss();
+              },
+              error => {
+                loading.dismiss();
+                this.handleError(error.json().error);
+              }
+            );
+        }
+      );
+    //this.dogsService.removeDogFromFavorites(token, dog);
   }
 
   isFavorite(dog: Dog) {
+    //console.log(dog);
     return this.dogsService.isDogFavorite(dog);
   }
 

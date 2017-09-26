@@ -19,32 +19,4 @@ export class ContactService {
                 return response.json();
             });
     }
-
-    getDogs(token: string, userType, userId) {
-        let url: string;
-        if (userType === 'owner') {
-          url = 'https://mydogwalk-ad2f0.firebaseio.com/dogs.json?auth=' + token + '&orderBy="owner"&equalTo="' + userId + '"';
-          //console.log(url);
-        } else {
-          //console.log(userType);
-          //console.log(userId);
-          url = 'https://mydogwalk-ad2f0.firebaseio.com/dogs.json?auth=' + token;
-        }
-        return this.http
-            .get(url)
-            .map((response: Response) => {
-                //console.log(response.json);
-                return response.json();
-            });
-    }
-
-    deleteDog(token: string, dogId) {
-        return this.http
-            .delete('https://mydogwalk-ad2f0.firebaseio.com/dogs/-' + dogId + '.json?auth=' + token)
-            .map((response: Response) => {
-                //console.log(response.json);
-                return response.json();
-            });
-    }
-
 }

@@ -13,6 +13,7 @@ import { SigninPage } from '../pages/signin/signin';
 import { SignupPage } from '../pages/signup/signup';
 import { AuthService} from '../services/auth';
 import { ProfileService} from '../services/profile';
+import { DogsService } from '../services/dogs'
 
 
 @Component({
@@ -31,7 +32,8 @@ export class MyApp {
               private authService: AuthService,
               public events: Events,
               private alertCtrl: AlertController,
-              private profileService: ProfileService
+              private profileService: ProfileService,
+              private dogsService: DogsService
               ) {
     firebase.initializeApp({
       apiKey: "AIzaSyDfSnSi7aQbdNJrbbSZ-Q2Ijz2uDD0g8rQ",
@@ -63,6 +65,47 @@ export class MyApp {
                           this.rootPage = TabsOwnerPage;
                         } else {
                           this.rootPage = TabsPage;
+
+                          //console.log('planning to intitialize favoriteDogs here');
+                          this.authService.getActiveUser().getToken()
+                            .then(
+                              (token: string) => {
+                                this.dogsService.getFavoriteDogs(token)
+                                  .subscribe(
+                                    (data) => {
+                                      if (data) {
+                                      this.dogsService.favoriteDogs = [];
+                                      //console.log('watching this 22');
+                                      //console.log(data);
+                                        for (const key of Object.keys(data)) {
+                                          //console.log(key);
+                                          //console.log('watching this 23');
+                                          //console.log(data[key].dogId)
+                                          const dogId = data[key].dogId
+                                          this.dogsService.getDog(token, '-' + dogId)
+                                            .subscribe(
+                                              (data) => {
+                                                //console.log('watch this');
+                                                //console.log(data);
+                                                //console.log('watching this 24');
+                                                //console.log(data[key]);
+                                                data.id = dogId;
+                                                //console.log(data);
+                                                this.dogsService.favoriteDogs.push(data);
+                                              },
+                                              error => {
+                                                this.handleError(error.json().error);
+                                              }
+                                            );
+                                        }
+                                      }
+                                    },
+                                    error => {
+                                      this.handleError(error.json().error);
+                                    }
+                                  );
+                              }
+                            );
                         };
                       }
                     },

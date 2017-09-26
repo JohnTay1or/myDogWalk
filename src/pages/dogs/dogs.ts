@@ -71,7 +71,7 @@ export class DogsPage {
   }
 
   onRemoveDog(selectedDog: Dog) {
-    console.log(selectedDog.id);
+    //console.log(selectedDog.id);
     //this.profile = this.profileService.profile;
     const loading = this.loadingCtrl.create({
       content: 'Please wait...'
@@ -150,13 +150,13 @@ export class DogsPage {
     return 1;
   }
 
-  onRemoveFromFavorites(dog: Dog) {
+  /*onRemoveFromFavorites(dog: Dog) {
     this.dogsService.removeDogFromFavorites(dog);
-  }
+  }*/
 
-  isFavorite(dog: Dog) {
+  /*isFavorite(dog: Dog) {
     return this.dogsService.isDogFavorite(dog);
-  }
+  }*/
 
   private handleError(errorMessage: string) {
     const alert = this.alertCtrl.create({

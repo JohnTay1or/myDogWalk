@@ -1,0 +1,101 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      Find a dog
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form #f="ngForm" (ngSubmit)="onFindDog(f)">
+    <ion-list>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label fixed>From Age</ion-label>
+              <ion-input
+                type="number"
+                name="fromAge"
+                placeholder="0"
+                ngModel></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label fixed>To Age</ion-label>
+              <ion-input
+                type="number"
+                name="toAge"
+                placeholder="10"
+                ngModel></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-item>
+            <ion-label fixed>Sex</ion-label>
+            <ion-select name="sex" [(ngModel)]="sex">
+              <!--<ion-option
+                *ngFor="let option of selectOptions"
+                [value]="option">{{ option }}</ion-option>>-->
+              <ion-option value="" selected>Any</ion-option>
+              <ion-option value="Male">Male</ion-option>
+              <ion-option value="Female">Female</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item>
+            <ion-label fixed>Energy</ion-label>
+            <ion-select name="energy" [(ngModel)]="energy">
+              <!--<ion-option
+                *ngFor="let option of selectOptions"
+                [value]="option">{{ option }}</ion-option>>-->
+              <ion-option value="" selected>Any</ion-option>
+              <ion-option value="Lazy">Lazy</ion-option>
+              <ion-option value="Moderate">Moderate</ion-option>
+              <ion-option value="Active">Active</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item>
+            <ion-label fixed>Size</ion-label>
+            <ion-select name="size" [(ngModel)]="size">
+              <!--<ion-option
+                *ngFor="let option of selectOptions"
+                [value]="option">{{ option }}</ion-option>>-->
+              <ion-option value="" selected>Any</ion-option>
+              <ion-option value="Extra Small">Extra Small</ion-option>
+              <ion-option value="Small" selected>Small</ion-option>
+              <ion-option value="Medium" selected>Medium</ion-option>
+              <ion-option value="Large">Large</ion-option>
+              <ion-option value="Extra Large">Extra Large</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item>
+            <ion-label fixed>Breed</ion-label>
+            <ion-input
+              type="string"
+              name="breed"
+              placeholder="Enter a breed"
+              ngModel
+              required></ion-input>
+          </ion-item>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+    <button
+      ion-button
+      type="submit"
+      block>Find Dog</button>
+  </form>
+</ion-content>

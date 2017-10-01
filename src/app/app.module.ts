@@ -13,6 +13,7 @@ import { ContactPage } from '../pages/contact/contact';
 //import { HomePage } from '../pages/home/home';
 import { FavoritesPage } from '../pages/favorites/favorites';
 import { DogsPage } from '../pages/dogs/dogs';
+import { FindDogPage } from '../pages/find-dog/find-dog';
 import { DogPage } from '../pages/dog/dog';
 import { DogsService } from '../services/dogs';
 import { NewDogPage } from '../pages/new-dog/new-dog';
@@ -44,7 +45,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SigninPage,
     SignupPage,
     ProfilePage,
-    EditProfilePage
+    EditProfilePage,
+    FindDogPage
   ],
   imports: [
     BrowserModule,
@@ -67,7 +69,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SigninPage,
     SignupPage,
     ProfilePage,
-    EditProfilePage
+    EditProfilePage,
+    FindDogPage
   ],
   providers: [
     StatusBar,
